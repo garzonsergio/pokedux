@@ -1,17 +1,14 @@
 import React from "react";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
+import { StarOutlined } from "@ant-design/icons";
 
-const PokeCard = () => {
+const PokeCard = ({ name, url }) => {
   return (
     <Card
-      title="Bulbasaur"
-      cover={
-        <img
-          src="https://static.wikia.nocookie.net/espokemon/images/4/43/Bulbasaur.png"
-          alt="Bulbasaur"
-        />
-      }
+      title={name}
+      cover={<img src={url} alt={name} />}
+      extra={<StarOutlined />}
     >
       <Meta description="Plant, Water" />
     </Card>
