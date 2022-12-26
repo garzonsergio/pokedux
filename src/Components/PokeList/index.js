@@ -8,7 +8,14 @@ const PokeList = ({ pokemons }) => {
   return (
     <div className="PokeList">
       {pokemons.map((pokemon) => {
-        return <PokeCard name={pokemon.name} key={pokemon.name} url={pokemon.url} />;
+        return (
+          <PokeCard
+            name={pokemon.name}
+            key={pokemon.name}
+            url={pokemon.sprites.front_default}
+            description={pokemon.types[0].type.name}
+          />
+        );
       })}
     </div>
   );
