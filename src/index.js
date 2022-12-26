@@ -4,11 +4,21 @@ import React, { createRef } from "react";
 import ReactDOM from "react-dom/client";
 import { pokemonsReducer } from "./Reducers/pokemons";
 import { Provider } from "react-redux";
-import { legacy_createStore as createStore } from "redux";
+import {
+  applyMiddleware,
+  compose,
+  legacy_createStore as createStore,
+} from "redux";
+import { featuring, logger, sortAlphabetic } from "./Middlewares";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const store = createStore(pokemonsReducer);
+const composedEnhancers = compose(
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(logger, featuring, sortAlphabetic)
+);
+
+const store = createStore(pokemonsReducer, composedEnhancers);
 
 root.render(
   <React.StrictMode>
